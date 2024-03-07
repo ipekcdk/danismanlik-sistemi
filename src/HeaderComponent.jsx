@@ -14,7 +14,5 @@ export default function HeaderComponent() {
   placement="center"
   rightComponent={{ icon: 'home', color: '#fff', style: { marginHorizontal: 20, marginTop: 25 } }}
 />
-
-
   );
 }
