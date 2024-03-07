@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Button } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context'; 
+import { Header, Icon } from "react-native-elements";
+
 
 export default function App() {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -16,7 +18,7 @@ export default function App() {
   const askForCameraPermission = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync();
     setHasCameraPermission(status === 'granted');
-  };
+  }
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
@@ -28,7 +30,7 @@ export default function App() {
       <View style={styles.container}>
         <Text>Kamera izni isteniyor...</Text>
       </View>
-    );
+    )
   }
 
   if (hasCameraPermission === false) {
@@ -37,14 +39,28 @@ export default function App() {
         <Text style={{ margin: 10 }}>Kamera erişim izni reddedildi.</Text>
         <Button title={'Yeniden Tara'} onPress={() => askForCameraPermission()} />
       </View>
-    );
+    )
   }
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaView style={styles.safeArea}>
+<Header
+  barStyle="default"
+  centerComponent={{
+    text: "Danışman Randevu Sistemi",
+    style: { color: "#fff", marginTop: '14%', fontSize: '19', fontWeight: 'bold' }
+  }}
+  containerStyle={{ width: '100%', height: '12%'}} 
+  leftComponent={{ icon: "menu", color: "#fff", marginTop: '40%' }}
+  placement="center"
+  rightComponent={{ icon: "home", color: "#fff", marginTop: '40%' }}
+/>
+
+
+
+
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.container}>
-          <Text style={styles.header}>Danışman Randevu Sistemi</Text>
+        <View style={styles.container}>        
           <Text style={styles.content}>Görüşmek istediğiniz danışmanın QR kodunu taratınız.</Text>
           <View style={styles.barcodebox}>
             <Camera
@@ -55,10 +71,10 @@ export default function App() {
 
           <Text style={styles.maintext}>{text}</Text>
 
-          {scanned && (
+          {scanned ? (
             <View style={styles.buttonContainer}>
               <Button
-                color='red'
+                buttonColor='red'
                 icon="camera"
                 mode="contained"
                 onPress={() => setScanned(false)}
@@ -67,36 +83,48 @@ export default function App() {
               </Button>
               
               <Button
-                color='green'
+                buttonColor='green'
                 icon="check"
                 mode='contained'
-                onPress={() => console.log("Randevu Oluştur")}
+                onPress={() => ({})}
                 style={[styles.button, styles.smallButton]}>
                 Randevu Oluştur
               </Button>
             </View>
-          )}
+          ) : null}
 
           <View style={styles.danismanContainer}>
-            <Button
-              color={'#1d60bd'}
-              icon="eye"
-              mode="contained"
-              onPress={() => console.log("Danışman Girişi")}
-              style={[styles.danismanButton, styles.smallButton]}>
+            <Button buttonColor={'#1d60bd'} icon="eye" mode="contained" onPress={() => console.log('Danışman Girişi')} style={[styles.danismanButton, styles.smallButton]}>
               Danışman Girişi
             </Button>
           </View>
           
         </View>
       </ScrollView>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 }
 
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  banner: {
+    backgroundColor: '#1d7e88',
+    paddingVertical: 20,
+    alignItems: 'center',
+    paddingLeft: 15,
+  },
+  bannerText: {
+    fontSize: 25,
+    marginTop:30,
+    paddingVertical: 15,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
   scrollContainer: {
     flexGrow: 1,
     alignItems: 'center',
@@ -124,7 +152,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   text: {
-    marginBottom: 10, 
+    marginBottom: 50, 
   },
 
   buttonContainer: {
@@ -167,3 +195,5 @@ const styles = StyleSheet.create({
     color: '#1a360c'
   },
 });
+
+
