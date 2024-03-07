@@ -44,20 +44,16 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-<Header
-  barStyle="default"
-  centerComponent={{
-    text: "Danışman Randevu Sistemi",
-    style: { color: "#fff", marginTop: '14%', fontSize: '19', fontWeight: 'bold' }
-  }}
-  containerStyle={{ width: '100%', height: '12%'}} 
-  leftComponent={{ icon: "menu", color: "#fff", marginTop: '40%' }}
-  placement="center"
-  rightComponent={{ icon: "home", color: "#fff", marginTop: '40%' }}
-/>
-
-
-
+      <Header
+        barStyle="default"
+        centerComponent={{
+        text: "Danışman Randevu Sistemi",
+        style: { color: "#fff", marginTop: '14%', fontSize: 19, fontWeight: 'bold' }}}
+        containerStyle={{ width: '100%', height: '12%'}} 
+        leftComponent={{ icon: "menu", color: "#fff", marginTop: '40%' }}
+        placement="center"
+        rightComponent={{ icon: "home", color: "#fff", marginTop: '40%' }}
+      />
 
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>        
@@ -98,7 +94,7 @@ export default function App() {
               Danışman Girişi
             </Button>
           </View>
-          
+
         </View>
       </ScrollView>
     </SafeAreaView>
