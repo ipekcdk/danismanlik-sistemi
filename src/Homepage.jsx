@@ -2,11 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Homepage() {
-const [hasCameraPermission, setHasCameraPermission] = useState(null);
+
+  const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Henüz QR kod taranmadı');
+
+  const navigation = useNavigation();
+
+  const handleLoginPress = () => {
+    navigation.navigate('Danışman Girişi');
+  };
 
   useEffect(() => {
     askForCameraPermission();
@@ -75,7 +84,7 @@ const [hasCameraPermission, setHasCameraPermission] = useState(null);
           ) : null}
 
           <View style={styles.danismanContainer}>
-            <Button buttonColor={'#1d60bd'} icon="eye" mode="contained" onPress={() => console.log('Danışman Girişi')} style={[styles.danismanButton, styles.smallButton]}>
+            <Button buttonColor={'#1d60bd'} icon="eye" mode="contained" onPress={handleLoginPress} style={[styles.danismanButton, styles.smallButton]}>
               Danışman Girişi
             </Button>
           </View>

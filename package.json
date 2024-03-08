@@ -9,7 +9,9 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~50.0.8",
+    "@react-navigation/native": "^6.1.14",
+    "@react-navigation/stack": "^6.3.25",
+    "expo": "~50.0.11",
     "expo-barcode-scanner": "~12.9.3",
     "expo-camera": "~14.0.5",
     "expo-status-bar": "~1.11.1",
