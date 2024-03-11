@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +15,10 @@ export default function Homepage() {
 
   const handleLoginPress = () => {
     navigation.navigate('Danışman Girişi');
+  };
+
+  const handleLoginPress2 = () => {
+    navigation.navigate('Randevu Oluştur');
   };
 
   useEffect(() => {
@@ -50,6 +54,9 @@ export default function Homepage() {
 
   return (
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.logoContainer}>
+          <Image source={require('../assets/images/logo.png')} style={{ width: 250, height: 180 }}/>
+        </View>
         <View style={styles.container}>        
           <Text style={styles.content}>Görüşmek istediğiniz danışmanın QR kodunu taratınız.</Text>
           <View style={styles.barcodebox}>
@@ -76,7 +83,7 @@ export default function Homepage() {
                 buttonColor='green'
                 icon="check"
                 mode='contained'
-                onPress={() => ({})}
+                onPress={handleLoginPress2}
                 style={[styles.button, styles.smallButton]}>
                 Randevu Oluştur
               </Button>
@@ -84,7 +91,7 @@ export default function Homepage() {
           ) : null}
 
           <View style={styles.danismanContainer}>
-            <Button buttonColor={'#1d60bd'} icon="eye" mode="contained" onPress={handleLoginPress} style={[styles.danismanButton, styles.smallButton]}>
+            <Button buttonColor={'#165570'} icon="eye" mode="contained" onPress={handleLoginPress} style={[styles.danismanButton, styles.smallButton]}>
               Danışman Girişi
             </Button>
           </View>
@@ -101,6 +108,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
+
   },
   container: {
     flex: 1,
@@ -150,12 +159,14 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   content: {
-    fontSize: 14,
+    fontSize: 15,
     fontStyle: 'italic',
     textAlign: 'center',
     marginVertical: 10,
-    color: '#1a360c'
+    color: '#1a360c',
+    marginBottom: 20,
   },
+  
 });
 
 
