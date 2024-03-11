@@ -32,7 +32,7 @@ export default function Homepage() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setText(`Bulunan QR Kod: ${type}`);
+    setText(`${data}`);
   };
 
   if (hasCameraPermission === null) {
