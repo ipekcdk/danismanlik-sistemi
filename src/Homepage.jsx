@@ -143,10 +143,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10,
-    width: windowWidth - 40, 
+    width: windowWidth, 
   },
   danismanButton: {
-    width: '100%',
+    width: '88%',
     borderRadius: 20,
   },
   content: {
