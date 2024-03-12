@@ -6,6 +6,7 @@ import Login from './src/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Appointment from './src/Appointment';
+import Chart from './src/Chart';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Screen name="Anasayfa" component={Homepage} />
           <Stack.Screen name="Danışman Girişi" component={Login} />
           <Stack.Screen name="Randevu Oluştur" component={Appointment}/>
+          <Stack.Screen name="Müsaitlik Çizelgesi" component={Chart}/>
         </Stack.Navigator>
       </NavigationContainer>
     </View>

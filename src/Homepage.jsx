@@ -13,12 +13,12 @@ export default function Homepage() {
 
   const navigation = useNavigation();
 
-  const handleLoginPress = () => {
+  const danismanGirisi = () => {
     navigation.navigate('Danışman Girişi');
   };
 
-  const handleLoginPress2 = () => {
-    navigation.navigate('Randevu Oluştur');
+  const chart = () => {
+    navigation.navigate('Müsaitlik Çizelgesi');
   };
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function Homepage() {
                 buttonColor='green'
                 icon="check"
                 mode='contained'
-                onPress={handleLoginPress2}
+                onPress={chart}
                 style={[styles.button, styles.smallButton]}>
                 Randevu Oluştur
               </Button>
@@ -91,7 +91,7 @@ export default function Homepage() {
           ) : null}
 
           <View style={styles.danismanContainer}>
-            <Button buttonColor={'#165570'} icon="eye" mode="contained" onPress={handleLoginPress} style={[styles.danismanButton, styles.smallButton]}>
+            <Button buttonColor={'#165570'} icon="eye" mode="contained" onPress={danismanGirisi} style={[styles.danismanButton, styles.smallButton]}>
               Danışman Girişi
             </Button>
           </View>

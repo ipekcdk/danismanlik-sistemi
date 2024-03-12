@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@react-native-community/checkbox": "^0.5.17",
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/stack": "^6.3.25",
+    "@rneui/themed": "^4.0.0-rc.8",
     "expo": "~50.0.11",
     "expo-barcode-scanner": "~12.9.3",
     "expo-camera": "~14.0.5",
