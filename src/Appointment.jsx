@@ -10,6 +10,7 @@ export default function Appointment() {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [subject, setSubject] = useState('');
+  const [emailError, setEmailError] = useState(false); // Email hatası için state
   const navigation = useNavigation();
 
   const homepage = () => {
@@ -27,7 +28,19 @@ export default function Appointment() {
       Alert.alert('Hata', 'Lütfen tüm alanları doldurunuz.');
     }
   };
-  
+
+  const validateEmail = (email) => {
+    return email.endsWith('@iste.edu.tr');
+  };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+    if (!validateEmail(text)) {
+      setEmailError(true); // Hata olduğunda emailError state'ini true yap
+    } else {
+      setEmailError(false); // Hata düzeldiğinde emailError state'ini false yap
+    }
+  };
 
   return (
     <KeyboardAvoidingView 
@@ -36,6 +49,9 @@ export default function Appointment() {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.logoContainer}>
+          <Image source={require('../assets/images/appointment.png')} style={{ width: 250, height: 250 }}/>
+        </View>
         <View style={styles.inputContainer}>
           <View style={styles.inputWrapper}>
             <Ionicons style={styles.inputIcon} name="person" size={24} color="#666" />
@@ -53,34 +69,18 @@ export default function Appointment() {
               style={styles.input}
               placeholder='Okul E-mail Adresiniz'
               value={email}
-              onChangeText={setEmail}
+              onChangeText={handleEmailChange} // Değişiklik fonksiyonu
+              onFocus={() => setEmailError(false)} // Inputa odaklandığında emailError state'ini sıfırla
             />
+            {emailError && ( // emailError true olduğunda hata mesajını göster
+              <Text style={styles.errorText}>Lütfen @iste.edu.tr uzantılı mail adresinizi yazınız.</Text>
+            )}
           </View>
 
           <View style={styles.inputWrapper}>
-            <Ionicons style={styles.inputIcon} name="calendar" size={24} color="#666" />
+            <Ionicons style={[styles.inputIcon, {paddingTop:25}]} name="chatbox-ellipses" size={24} color="#666" />
             <TextInput
-              style={styles.input}
-              placeholder='Randevu Tarihi'
-              value={date}
-              onChangeText={setDate}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Ionicons style={styles.inputIcon} name="time" size={24} color="#666" />
-            <TextInput
-              style={styles.input}
-              placeholder='Randevu Saati'
-              value={time}
-              onChangeText={setTime}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Ionicons style={styles.inputIcon} name="chatbox-ellipses" size={24} color="#666" />
-            <TextInput
-              style={styles.input}
+              style={[styles.input, { height: 100 }]}
               placeholder='Konu'
               value={subject}
               onChangeText={setSubject}
@@ -90,10 +90,9 @@ export default function Appointment() {
 
         <Button
           mode="contained"
-          style={[styles.bookButton, (!name || !email || !date || !time || !subject) && styles.disabled]}
+          style={styles.bookButton}
           labelStyle={{ fontWeight: 'bold', fontSize: 16 }}
           onPress={handleCreateAppointment}
-          disabled={!name || !email || !date || !time || !subject}
         >
           Randevu Al
         </Button>
@@ -134,9 +133,14 @@ const styles = StyleSheet.create({
     top: 15,
     left: 10,
     zIndex: 1, 
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginTop: 5,
   },  
   bookButton: {
-    backgroundColor: '#4caf50',
+    backgroundColor: '#465A65',
     width: '80%',
     height: 50,
     borderRadius: 10,
@@ -147,5 +151,8 @@ const styles = StyleSheet.create({
   },
   disabled: {
     backgroundColor: '#a0a0a0',
+  },
+  logoContainer: {
+    marginBottom: 40,
   },
 });

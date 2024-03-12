@@ -8,11 +8,11 @@ export default function Login() {
     <KeyboardAvoidingView 
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20} // İstenirse düzenlenebilir.
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.logoContainer}>
-          <Image source={require('../assets/images/login.png')} style={{ width: 200, height: 200 }}/>
+          <Image source={require('../assets/images/login.png')} style={{ width: 250, height: 250 }}/>
         </View>
 
         <View style={styles.inputContainer}>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     zIndex: 1, 
   },  
   loginButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#465A65',
     width: '80%',
     height: 50,
     borderRadius: 10,

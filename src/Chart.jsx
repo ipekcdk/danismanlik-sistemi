@@ -12,18 +12,17 @@ export default function Chart() {
 
   const navigation = useNavigation();
 
-  const handleLoginPress3 = () => {
+  const randevuOlustur = () => {
     navigation.navigate('Randevu Oluştur');
   };
 
-  // Tüm checkboxları kontrol etmek için bir fonksiyon
   const isAnyCheckboxChecked = () => {
     return selectedItemIndex !== -1;
   };
 
   return (
     <View style={styles.container}>
-      {['User 1', 'User 2', 'User 3'].map((user, index) => (
+      {['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'].map((day, index) => (
         <ListItem key={index} bottomDivider onPress={() => handleItemPress(index)} containerStyle={selectedItemIndex === index && styles.selectedItem}>
           <ListItem.CheckBox
             iconType="material-community"
@@ -33,18 +32,18 @@ export default function Chart() {
             onPress={() => handleItemPress(index)}
           />
           <ListItem.Content>
-            <ListItem.Title>{user}</ListItem.Title>
-            <ListItem.Subtitle>{index % 2 === 0 ? 'CA, US' : 'HR, India'}</ListItem.Subtitle>
+            <ListItem.Title>{day}</ListItem.Title>
+            <ListItem.Subtitle>Saatler: 09:00 - 17:00</ListItem.Subtitle>
           </ListItem.Content>
           <Icon name="chevron-right" type="material" color="gray" size={24} />
         </ListItem>
       ))}
       <TouchableOpacity
-        style={[styles.button, !isAnyCheckboxChecked() && styles.disabledButton]} // Eğer hiçbir checkbox seçilmemişse butonu devre dışı bırak
-        onPress={handleLoginPress3}
-        disabled={!isAnyCheckboxChecked()} // Eğer hiçbir checkbox seçilmemişse butonu devre dışı bırak
+        style={[styles.button, !isAnyCheckboxChecked() && styles.disabledButton]} 
+        onPress={randevuOlustur}
+        disabled={!isAnyCheckboxChecked()} 
       >
-        <Text style={styles.buttonText}>İleri</Text>
+        <Icon name="arrow-right" type="material-community" color="white" size={24} />
       </TouchableOpacity>
     </View>
   );
@@ -53,7 +52,7 @@ export default function Chart() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
@@ -61,14 +60,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0e0e0',
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: 'green',
     paddingVertical: 12,
-    borderRadius: 5,
+    borderRadius: 25,
     marginTop: 20,
     alignSelf: 'center',
+    width: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 120,
+    right: 35,
   },
   disabledButton: {
-    backgroundColor: 'gray', // Devre dışı buton rengi
+    backgroundColor: 'gray', 
   },
   buttonText: {
     color: 'white',
