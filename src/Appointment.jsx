@@ -10,7 +10,7 @@ export default function Appointment() {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [subject, setSubject] = useState('');
-  const [emailError, setEmailError] = useState(false); // Email hatası için state
+  const [emailError, setEmailError] = useState(false); 
   const navigation = useNavigation();
 
   const homepage = () => {
@@ -36,9 +36,9 @@ export default function Appointment() {
   const handleEmailChange = (text) => {
     setEmail(text);
     if (!validateEmail(text)) {
-      setEmailError(true); // Hata olduğunda emailError state'ini true yap
+      setEmailError(true); 
     } else {
-      setEmailError(false); // Hata düzeldiğinde emailError state'ini false yap
+      setEmailError(false); 
     }
   };
 
@@ -69,10 +69,10 @@ export default function Appointment() {
               style={styles.input}
               placeholder='Okul E-mail Adresiniz'
               value={email}
-              onChangeText={handleEmailChange} // Değişiklik fonksiyonu
-              onFocus={() => setEmailError(false)} // Inputa odaklandığında emailError state'ini sıfırla
+              onChangeText={handleEmailChange} 
+              onFocus={() => setEmailError(false)} 
             />
-            {emailError && ( // emailError true olduğunda hata mesajını göster
+            {emailError && ( 
               <Text style={styles.errorText}>Lütfen @iste.edu.tr uzantılı mail adresinizi yazınız.</Text>
             )}
           </View>
