@@ -27,7 +27,6 @@ export default function ChartEdit() {
   };
 
   const handleLogin = () => {
-    setIsAdmin(true);
     navigation.navigate('Anasayfa')
   };
 
@@ -52,7 +51,7 @@ export default function ChartEdit() {
                   value={editedTimes[day]}
                   onChangeText={(text) => handleTimeChange(day, text)}
                   keyboardType="numeric"
-                  maxLength={11} // Saat formatı 11 karakteri geçmemeli: "hh:mm - hh:mm"
+                  maxLength={11}
                 />
               )}
               {!isAdmin && selectedItemIndex !== day && (
