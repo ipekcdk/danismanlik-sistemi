@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Appointment from './src/Appointment';
 import Chart from './src/Chart';
+import ChartEdit from './src/ChartEdit';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
           <Stack.Screen name="Danışman Girişi" component={Login} />
           <Stack.Screen name="Randevu Oluştur" component={Appointment}/>
           <Stack.Screen name="Müsaitlik Çizelgesi" component={Chart}/>
+          <Stack.Screen name="Çizelge Düzenle" component={ChartEdit}/>
         </Stack.Navigator>
       </NavigationContainer>
     </View>

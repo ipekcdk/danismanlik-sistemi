@@ -2,8 +2,20 @@ import { StyleSheet, Text, View, Image, ScrollView, KeyboardAvoidingView, Platfo
 import React from 'react'
 import { Button, TextInput } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
+
+  const navigation = useNavigation();
+
+  const homepage = () => {
+    navigation.navigate('Anasayfa');
+  };
+
+  const ChartEdit = () => {
+    navigation.navigate('Çizelge Düzenle');
+  };
+
   return (
     <KeyboardAvoidingView 
       style={styles.container}
@@ -29,7 +41,7 @@ export default function Login() {
           </View>
         </View>
 
-        <Button mode="contained" style={styles.loginButton} labelStyle={{ fontWeight: 'bold', fontSize: 16 }}>
+        <Button mode="contained" style={styles.loginButton} onPress={ChartEdit} labelStyle={{ fontWeight: 'bold', fontSize: 16 }}>
           Giriş Yap
         </Button>
       </ScrollView>
