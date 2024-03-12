@@ -18,7 +18,7 @@ export default function Appointment() {
   };
 
   const handleCreateAppointment = () => {
-    if (name && email && date && time && subject) {
+    if (name && email && subject) {
       Alert.alert(
         'Randevu Talebi',
         'Randevu talebiniz başarıyla oluşturulmuştur.',
