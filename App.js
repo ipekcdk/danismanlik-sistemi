@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Appointment from './src/Appointment';
 import Chart from './src/Chart';
 import ChartEdit from './src/ChartEdit';
+import app from './firebaseConfig';
 
 const Stack = createStackNavigator();
 
