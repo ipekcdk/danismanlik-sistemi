@@ -25,14 +25,19 @@ export default function Login() {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Giriş başarılı
         const user = userCredential.user;
-        // Giriş sonrası işlemleri yapabilirsiniz
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // Giriş başarısız, hata mesajını gösterebilirsiniz
+
+        if (errorCode === 'auth/wrong-password') {
+          alert('Hatalı şifre girdiniz. Lütfen tekrar deneyin.');
+        } else if (errorCode === 'auth/user-not-found') {
+          alert('Girdiğiniz e-posta adresiyle bir kullanıcı bulunamadı.');
+        } else {
+          alert('Giriş yapılırken bir hata oluştu. Lütfen tekrar deneyin.');
+        }
       });
   };
 

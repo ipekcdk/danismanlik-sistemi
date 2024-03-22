@@ -1,4 +1,3 @@
-// Import necessary components from React Native
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { ListItem, Icon } from '@rneui/themed';
