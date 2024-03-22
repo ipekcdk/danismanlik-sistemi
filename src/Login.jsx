@@ -1,10 +1,16 @@
 import { StyleSheet, Text, View, Image, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Button, TextInput } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import app from '../firebaseConfig';
+
+const auth = getAuth();
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
 
@@ -14,6 +20,20 @@ export default function Login() {
 
   const ChartEdit = () => {
     navigation.navigate('Çizelge Düzenle');
+  };
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Giriş başarılı
+        const user = userCredential.user;
+        // Giriş sonrası işlemleri yapabilirsiniz
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // Giriş başarısız, hata mesajını gösterebilirsiniz
+      });
   };
 
   return (
