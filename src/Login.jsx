@@ -1,16 +1,28 @@
-import { StyleSheet, Text, View, Image, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigation } from '@react-navigation/native';
 import app from '../firebaseConfig';
-
-const auth = getAuth();
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const token = user.accessToken;
+      return user;
+    } catch(error) {
+      Alert.alert("Giriş Başarısız", "E-posta veya şifre yanlış.");
+      navigation.navigate('Anasayfa');
+      throw error;
+    }
+  };
 
   const navigation = useNavigation();
 
@@ -19,26 +31,8 @@ export default function Login() {
   };
 
   const ChartEdit = () => {
+    handleLogin(); 
     navigation.navigate('Çizelge Düzenle');
-  };
-
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        if (errorCode === 'auth/wrong-password') {
-          alert('Hatalı şifre girdiniz. Lütfen tekrar deneyin.');
-        } else if (errorCode === 'auth/user-not-found') {
-          alert('Girdiğiniz e-posta adresiyle bir kullanıcı bulunamadı.');
-        } else {
-          alert('Giriş yapılırken bir hata oluştu. Lütfen tekrar deneyin.');
-        }
-      });
   };
 
   return (
@@ -56,17 +50,32 @@ export default function Login() {
 
           <View >
             <Ionicons style={styles.inputIcon} name="person" size={24} color="#666" />
-            <TextInput style={styles.input} placeholder='E-mail Adresi' />
-
+            <TextInput 
+              style={styles.input} 
+              placeholder='E-mail Adresi'
+              onChangeText={setEmail} 
+              value={email} 
+            />
           </View>
 
           <View>
             <Ionicons style={styles.inputIcon} name="lock-closed" size={24} color="#666" />
-            <TextInput style={styles.input} placeholder='Şifre' secureTextEntry={true} />
+            <TextInput 
+              style={styles.input} 
+              placeholder='Şifre' 
+              secureTextEntry={true}
+              onChangeText={setPassword} 
+              value={password} 
+            />
           </View>
         </View>
 
-        <Button mode="contained" style={styles.loginButton} onPress={ChartEdit} labelStyle={{ fontWeight: 'bold', fontSize: 16 }}>
+        <Button 
+          mode="contained" 
+          style={styles.loginButton} 
+          onPress={ChartEdit} 
+          labelStyle={{ fontWeight: 'bold', fontSize: 16 }}
+        >
           Giriş Yap
         </Button>
       </ScrollView>
@@ -84,7 +93,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 60,
-
   },
   logoContainer: {
     marginBottom: 40,
