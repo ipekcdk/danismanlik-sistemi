@@ -4,7 +4,6 @@ import { Camera } from 'expo-camera';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-
 export default function Homepage() {
 
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
