@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, Dimensions, Image } from 'react-native';
-import { Camera } from 'expo-camera';
+import { Camera, CameraType } from 'expo-camera/legacy';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
