@@ -1,19 +1,18 @@
 const functions = require('firebase-functions');
 const nodemailer = require('nodemailer');
 
-// Nodemailer konfigürasyonu
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'your-email@gmail.com',
-        pass: 'your-email-password'
+        user: 'randevusistemi@gmail.com',
+        pass: '123456'
     }
 });
 
 // Firebase Function
 exports.sendEmail = functions.https.onCall((data, context) => {
     const mailOptions = {
-        from: 'your-email@gmail.com',
+        from: 'randevusistemi@gmail.com',
         to: data.email,
         subject: data.subject,
         text: data.message
