@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView, KeyboardAvoidingView, Platfo
 import { Button, TextInput } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import * as MailComposer from 'expo-mail-composer';
 
 export default function Appointment() {
   const [name, setName] = useState('');
@@ -19,13 +20,29 @@ export default function Appointment() {
 
   const handleCreateAppointment = () => {
     if (name && email && subject) {
-      Alert.alert(
-        'Randevu Talebi',
-        'Randevu talebiniz başarıyla oluşturulmuştur.',
-        [{ text: 'Tamam', onPress: () => homepage() }]
-      );
+      handleSendAppointmentEmail();
     } else {
       Alert.alert('Hata', 'Lütfen tüm alanları doldurunuz.');
+    }
+  };
+
+  // E-posta gönderme fonksiyonu
+  const handleSendAppointmentEmail = async () => {
+    try {
+      const { status } = await MailComposer.composeAsync({
+        recipients: [email],
+        subject: subject,
+        body: `Randevu Bilgileri:\nAd Soyad: ${name}\nE-posta: ${email}\nTarih: ${date}\nSaat: ${time}\nKonu: ${subject}`,
+      });
+
+      if (status === 'sent') {
+        Alert.alert('E-posta Gönderildi', 'Randevu talebiniz başarıyla alındı ve e-posta ile iletilmiştir.', [{ text: 'Tamam', onPress: () => homepage() }]);
+      } else {
+        Alert.alert('E-posta Gönderme Hatası', 'E-posta gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+      }
+    } catch (error) {
+      console.error('E-posta gönderme hatası:', error);
+      Alert.alert('Hata', 'E-posta gönderme sırasında bir hata oluştu.');
     }
   };
 
@@ -49,7 +66,7 @@ export default function Appointment() {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.logoContainer}>
+        <View style={styles.logoContainer}>
           <Image source={require('../assets/images/appointment.png')} style={{ width: 250, height: 250 }}/>
         </View>
         <View style={styles.inputContainer}>
